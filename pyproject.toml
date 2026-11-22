@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ios-debloat"
+version = "0.1.0"
+description = "Debloat iPhone, iPad, and Apple Watch from your terminal — Apple Configuration Profiles, DDM, Encrypted DNS, terminal QR delivery, and optional USB audit."
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.9"
+dependencies = []
+keywords = [
+    "ios",
+    "ipados",
+    "watchos",
+    "debloat",
+    "ios-debloat",
+    "mobileconfig",
+    "apple-intelligence",
+    "siri",
+    "privacy",
+    "telemetry",
+    "encrypted-dns",
+    "ddm",
+    "pymobiledevice3",
+    "tui",
+    "cli",
+]
+classifiers = [
+    "Environment :: Console :: Curses",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: MacOS",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Topic :: System :: Systems Administration",
+    "Topic :: Utilities",
+]
+
+[project.urls]
+Homepage = "https://github.com/will702/ios-debloat"
+Repository = "https://github.com/will702/ios-debloat"
+Issues = "https://github.com/will702/ios-debloat/issues"
+
+[project.scripts]
+ios-debloat = "ios_debloat.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["ios_debloat*"]

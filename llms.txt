@@ -1,0 +1,26 @@
+# ios-debloat
+
+> Zero-dependency Python 3 TUI and CLI to debloat iOS, iPadOS, and watchOS (26/27) — disable telemetry, personalized ads, Siri suggestions, and Apple Intelligence bloat using reversible Apple Configuration Profiles (.mobileconfig), Declarative Device Management (DDM) JSON, Encrypted DNS blocking, and optional USB/Wi-Fi live audits.
+
+## Docs & Agent Discovery
+- [README](https://github.com/will702/ios-debloat/blob/main/README.md): Installation, TUI controls, presets, wireless QR/AirDrop delivery, watchOS guide, optional `pymobiledevice3` USB workflow.
+- [AGENTS.md](https://github.com/will702/ios-debloat/blob/main/AGENTS.md): Machine-readable CLI contract, `--json` schemas, read-only vs mutating commands, safety invariants, and test commands.
+- [Agent Skill (SKILL.md)](https://github.com/will702/ios-debloat/blob/main/skills/ios-debloat/SKILL.md): Installable agent skill (`npx skills add will702/ios-debloat`) for auditing and debloating iPhone, iPad, and Apple Watch.
+
+## Core Commands
+- `./debloat` — launch interactive curses TUI
+- `./debloat --status --json` — inspect connected device, supervision status, active profile, DNS, and watchOS checklist
+- `./debloat --audit --json` — live (`pymobiledevice3` `processes ps` + `crash ls` + `apps list`) or offline privacy audit
+- `./debloat --preset telemetry --dns adguard --dns-apple-only --deliver qr` — generate `.mobileconfig` and serve over LAN QR
+- `./debloat --preset balanced --supervised --export-ddm ./ddm` — export Apple OS 26.4/27+ DDM JSON declarations
+- `./debloat --export-blocklist adguard` — print safe Apple telemetry/ad DNS blocklist
+- `./debloat --watch-checklist` — track manual Apple Watch toggles
+
+## Source Modules
+- [catalog.py](https://github.com/will702/ios-debloat/blob/main/ios_debloat/catalog.py): Apple `com.apple.applicationaccess` catalog, Encrypted DNS presets, removable stock apps, watchOS checklist, telemetry daemon list
+- [profile_builder.py](https://github.com/will702/ios-debloat/blob/main/ios_debloat/profile_builder.py): XML `.mobileconfig` & DDM JSON generation + `plutil -lint` validation
+- [qr.py](https://github.com/will702/ios-debloat/blob/main/ios_debloat/qr.py): Pure-Python QR encoder & Unicode terminal renderer
+- [device.py](https://github.com/will702/ios-debloat/blob/main/ios_debloat/device.py): Optional `pymobiledevice3` + `xcrun devicectl` adapter
+- [audit.py](https://github.com/will702/ios-debloat/blob/main/ios_debloat/audit.py): Live & offline telemetry audit builder
+- [cli.py](https://github.com/will702/ios-debloat/blob/main/ios_debloat/cli.py): CLI entrypoint
+- [tui.py](https://github.com/will702/ios-debloat/blob/main/ios_debloat/tui.py): Curses TUI
